@@ -1,0 +1,4 @@
+/home/scott/dev/World_of_Bij/build/debug/CMakeFiles/rebuild_cache.dir
+/home/scott/dev/World_of_Bij/build/debug/CMakeFiles/edit_cache.dir
+/home/scott/dev/World_of_Bij/build/debug/CMakeFiles/Sandbox.dir
+/home/scott/dev/World_of_Bij/build/debug/CMakeFiles/WoB.dir
