@@ -2,8 +2,8 @@
 // Created by scott on 4/1/2021.
 //
 
-#ifndef WOB1_OBJECT_H
-#define WOB1_OBJECT_H
+#ifndef WOB_OBJECT_H
+#define WOB_OBJECT_H
 
 #include "Entity.h"
 
@@ -22,10 +22,12 @@ protected: // These don't change once initialized
 public:
     Quad GetRect() const { return m_rect; }
     CriticalAngles GetRectCrit() const { return m_rectCrit; }
+    float GetWidth() const { return m_width; }
+    float GetHeight() const { return m_height; }
 public:
     void UpdateRectPosition();
     void DrawRect();
 };
 
 
-#endif //WOB1_OBJECT_H
+#endif //WOB_OBJECT_H

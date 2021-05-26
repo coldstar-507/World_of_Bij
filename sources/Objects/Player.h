@@ -1,5 +1,5 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef WOB_PLAYER_H
+#define WOB_PLAYER_H
 
 #include "MovingObj.h"
 #include "GameObject/Monsters.h"
@@ -36,4 +36,4 @@ public:
     void DrawMonsterTarget();
 };
 
-#endif // PLAYER_H
+#endif // WOB_PLAYER_H

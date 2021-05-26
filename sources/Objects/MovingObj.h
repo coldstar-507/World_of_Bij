@@ -1,5 +1,5 @@
-#ifndef MOVINGOCT_H
-#define MOVINGOCT_H
+#ifndef WOB_MOVINGOBJ_H
+#define WOB_MOVINGOBJ_H
 
 #include <vector>
 #include "OctogoneObj.h"
@@ -45,4 +45,4 @@ public:
     inline void NotSlowlyMoving() { m_slow = false; }
 };
 
-#endif // MOVINGOCT_H
+#endif // WOB_MOVINGOBJ_H

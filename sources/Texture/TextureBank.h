@@ -2,8 +2,8 @@
 // Created by scott on 4/1/2021.
 //
 
-#ifndef WOB1_TEXTUREBANK_H
-#define WOB1_TEXTUREBANK_H
+#ifndef WOB_TEXTUREBANK_H
+#define WOB_TEXTUREBANK_H
 
 #include <unordered_map>
 #include "Texture.h"
@@ -31,4 +31,4 @@ private:
 };
 
 
-#endif //WOB1_TEXTUREBANK_H
+#endif //WOB_TEXTUREBANK_H

@@ -1,5 +1,5 @@
-#ifndef ENVIRONEMENTOBJECT_H
-#define ENVIRONEMENTOBJECT_H
+#ifndef WOB_ENVIRONEMENTOBJECT_H
+#define WOB_ENVIRONEMENTOBJECT_H
 
 
 enum class EnvObjTypes
@@ -17,4 +17,4 @@ private:
     EnvObjTypes m_envObjType;
 };
 
-#endif // ENVIRONEMENTOBJECT_H
+#endif // WOB_ENVIRONEMENTOBJECT_H

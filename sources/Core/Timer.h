@@ -2,10 +2,11 @@
 // Created by scott on 4/1/2021.
 //
 
-#ifndef WOB1_TIMER_H
-#define WOB1_TIMER_H
+#ifndef WOB_TIMER_H
+#define WOB_TIMER_H
 
 #include <ctime>
+#include <cstdio>
 #include "SDL.h"
 
 constexpr Sint32 CLOCKS_PER_MS = CLOCKS_PER_SEC / 1000;
@@ -38,4 +39,4 @@ private:
 
 
 
-#endif //WOB1_TIMER_H
+#endif //WOB_TIMER_H

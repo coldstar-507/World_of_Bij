@@ -1,5 +1,5 @@
-#ifndef OCTAGONALOBJECT_H
-#define OCTAGONALOBJECT_H
+#ifndef WOB_OCTAGONALOBJECT_H
+#define WOB_OCTAGONALOBJECT_H
 
 #include "Entity.h"
 #include <string>
@@ -27,4 +27,4 @@ public:
 
 
 
-#endif // OCTAGONALOBJECT_H
+#endif // WOB_OCTAGONALOBJECT_H

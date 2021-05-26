@@ -5,13 +5,14 @@
 #include "TextureBank.h"
 #include "Core/Engine.h"
 #include "Core/Camera.h"
+#include "Core/Loger.h"
 
 #ifdef _WIN32
 
 #include <boost/filesystem.hpp>
 namespace fs = boost::filesystem;
 
-#elif __unix__
+#elif __linux__
 
 #include <filesystem>
 namespace fs = std::filesystem;
@@ -22,7 +23,7 @@ std::unordered_map<std::string, Texture*> TextureBank::m_textureBank;
 
 void TextureBank::Init()
 {
-    fs::directory_iterator res_it("../../ressources/images");
+    fs::directory_iterator res_it("../../../ressources/images");
     fs::directory_iterator end_it;
 
     std::string tmp_filePath;
@@ -36,7 +37,7 @@ void TextureBank::Init()
             tmp_assetID = tmp_it->path().stem().string();
             tmp_filePath = tmp_it->path().string();
             m_textureBank[tmp_assetID] = new Texture(tmp_filePath);
-            SDL_Log("Loaded [%s] at %s", tmp_assetID.c_str(), tmp_filePath.c_str());
+            Loger::logf("Loaded [%s] at %s", tmp_assetID.c_str(), tmp_filePath.c_str());
         }
     }
 

@@ -1,5 +1,5 @@
 #include "OctogoneObj.h"
-#include "Core/Drawer.h"
+#include "Core/Draw.h"
 
 OctogoneObj::OctogoneObj(Vector2 p_position, std::string p_textureID, float p_angle, float p_diametre)
     : Entity(p_position, p_textureID, p_angle), m_diametre(p_diametre)
@@ -36,15 +36,6 @@ OctogoneObj::OctogoneObj(Vector2 p_position, std::string p_textureID, float p_an
         DegToRad(292.5f),
         DegToRad(337.5f)
     };
-
-    PrintV2(m_oct.p1, "p1");
-    PrintV2(m_oct.p2, "p2");
-    PrintV2(m_oct.p3, "p3");
-    PrintV2(m_oct.p4, "p4");
-    PrintV2(m_oct.p5, "p5");
-    PrintV2(m_oct.p6, "p6");
-    PrintV2(m_oct.p7, "p7");
-    PrintV2(m_oct.p8, "p8");
 
     m_bigRayon = Distance(m_oct.p1, m_oct.p5) / 2.f;
 }

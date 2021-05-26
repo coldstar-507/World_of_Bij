@@ -1,5 +1,5 @@
-#ifndef ENTITY_H
-#define ENTITY_H
+#ifndef WOB_ENTITY_H
+#define WOB_ENTITY_H
 
 #include <cstdlib>
 #include <cstdio>
@@ -37,4 +37,4 @@ public:
     void DrawTexture();
 };
 
-#endif // ENTITY_H
+#endif // WOB_ENTITY_H

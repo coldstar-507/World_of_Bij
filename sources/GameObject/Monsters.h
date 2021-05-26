@@ -1,5 +1,5 @@
-#ifndef MONSTERS_H
-#define MONSTERS_H
+#ifndef WOB_MONSTERS_H
+#define WOB_MONSTERS_H
 
 #include "Objects/MovingObj.h"
 
@@ -32,4 +32,4 @@ private:
 
 };
 
-#endif // MONSTERS_H
+#endif // WOB_MONSTERS_H

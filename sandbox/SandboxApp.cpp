@@ -14,7 +14,7 @@ void SandboxApp::Init()
     SandboxApp::Engine::Init();
     TextureBank::Init();
     Vector2 pf = { 1000.f, 1000.f };
-    player = new Player( pf, "gris", 0.f, 90.f, .12f, 30);
+    player = new Player( pf, "gris", 0.f, 66.f, .15f, 30);
     ZoneManager::Init(player);
     Camera::Init(player->GetPositionAdress());
 
@@ -61,7 +61,6 @@ void SandboxApp::Events(SDL_Event *event)
         switch (event->type)
         {
         case SDL_MOUSEWHEEL:
-        {
             if (event->wheel.y > 0) // scroll up
             {
                 Camera::Zoom(1.05f);
@@ -70,95 +69,85 @@ void SandboxApp::Events(SDL_Event *event)
             {
                 Camera::Zoom(0.95f);
             }
-        }
+            break;
         case SDL_KEYDOWN:
-        {
             switch (event->key.keysym.sym)
             {
             case SDLK_LSHIFT:
-            {
                 player->SlowlyMoving();
                 break;
-            }
             case SDLK_TAB:
-            {
                 //player->TargetMonsters(ZoneManager::CurrentZone()->m_monstersVector);
                 Loger::log(player->m_monsterTarget);
                 break;
-            }
             case SDLK_ESCAPE:
-            {
                 SandboxApp::Stop();
                 break;
-            }
             case SDLK_RIGHT:
-            {
                 player->StrafingRight();
                 break;
-            }
             case SDLK_LEFT:
-            {
                 player->StrafingLeft();
                 break;
-            }
             case SDLK_UP:
-            {
+                player->MovingUp();
+                break;
+            case SDLK_DOWN:
+                player->MovingDown();
+                break;
+            case SDLK_d:
+                player->StrafingRight();
+                break;
+            case SDLK_s:
+                player->MovingDown();
+                break;
+            case SDLK_a:
+                player->StrafingLeft();
+                break;
+            case SDLK_w:
                 player->MovingUp();
                 break;
             }
-            case SDLK_DOWN:
-            {
-                player->MovingDown();
-                break;
-            }
-            }
             break;
-        }
         case SDL_KEYUP:
-        {
             switch (event->key.keysym.sym)
             {
             case SDLK_LSHIFT:
-            {
                 player->NotSlowlyMoving();
                 break;
-            }
             case SDLK_RIGHT:
-            {
                 player->NotStrafingRight();
                 break;
-            }
             case SDLK_LEFT:
-            {
                 player->NotStrafingLeft();
                 break;
-            }
             case SDLK_UP:
-            {
+                player->NotMovingUp();
+                break;
+            case SDLK_DOWN:
+                player->NotMovingDown();
+                break;
+            case SDLK_d:
+                player->NotStrafingRight();
+                break;
+            case SDLK_s:
+                player->NotMovingDown();
+                break;
+            case SDLK_a:
+                player->NotStrafingLeft();
+                break;
+            case SDLK_w:
                 player->NotMovingUp();
                 break;
             }
-            case SDLK_DOWN:
-            {
-                player->NotMovingDown();
-                break;
-            }
-            }
-        }
         case SDL_MOUSEBUTTONDOWN:
-        {
             break;
-        }
         case SDL_MOUSEMOTION:
-        {
             SDL_GetMouseState(player->GetMouseXYAdress().first, player->GetMouseXYAdress().second);
             break;
-        }
         case SDL_QUIT:
-        {
             SandboxApp::Stop();
             break;
-        }
         }
     }
 }

@@ -2,8 +2,8 @@
 // Created by scott on 4/1/2021.
 //
 
-#ifndef WOB1_CAMERA_H
-#define WOB1_CAMERA_H
+#ifndef WOB_CAMERA_H
+#define WOB_CAMERA_H
 
 #include "2DPhysics/Math.h"
 #include "SDL.h"
@@ -38,4 +38,4 @@ private:
 };
 
 
-#endif //WOB1_CAMERA_H
+#endif //WOB_CAMERA_H

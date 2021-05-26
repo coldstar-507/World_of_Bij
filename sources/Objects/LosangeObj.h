@@ -1,5 +1,5 @@
-#ifndef LOSANGE_H
-#define LOSANGE_H
+#ifndef WOB_LOSANGE_H
+#define WOB_LOSANGE_H
 
 // Un rectangle avec un 45degree rotation transform;
 
@@ -18,8 +18,10 @@ private:
 public:
     Quad GetLosa() const { return m_losa; }
     CriticalAngles GetCritLosa() const { return m_losaCrit; }
+    float GetWidth() const { return m_width; }
+    float GetHeight() const { return m_height; }
     void UpdateRectPosition();
     void DrawLosa();
 };
 
-#endif // LOSANGE_H
+#endif // WOB_LOSANGE_H

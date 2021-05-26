@@ -1,6 +1,6 @@
 #include "Entity.h"
 #include "Texture/TextureBank.h"
-#include "Core/Drawer.h"
+#include "Core/Draw.h"
 
 
 Entity::Entity(Vector2 p_position, std::string p_textureID, float p_angle)

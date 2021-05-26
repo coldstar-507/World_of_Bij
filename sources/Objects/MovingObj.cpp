@@ -90,13 +90,13 @@ void MovingObj::CalculateVitesse()
 {
     m_vitesse.x = *m_up   * std::cos(m_angle)
                 - *m_down * std::cos(m_angle)
-                + *m_sl   * std::cos(m_angle - M_PI / 2)
-                + *m_sr   * std::cos(m_angle + M_PI / 2);
+                + *m_sl   * std::cos(m_angle - Pi / 2)
+                + *m_sr   * std::cos(m_angle + Pi / 2);
 
     m_vitesse.y = *m_up   * std::sin(m_angle)
                 - *m_down * std::sin(m_angle)
-                + *m_sl   * std::sin(m_angle - M_PI / 2)
-                + *m_sr   * std::sin(m_angle + M_PI / 2);
+                + *m_sl   * std::sin(m_angle - Pi / 2)
+                + *m_sr   * std::sin(m_angle + Pi / 2);
 }
 
 void MovingObj::ApplyVitesse()

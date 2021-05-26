@@ -1,5 +1,5 @@
-#ifndef STAROBJ_H
-#define STAROBJ_H
+#ifndef WOB_STAROBJ_H
+#define WOB_STAROBJ_H
 
 #include <vector>
 #include "OctogoneObj.h"
@@ -40,4 +40,4 @@ public:
 
 };
 
-#endif // STAROBJ_H
+#endif // WOB_STAROBJ_H

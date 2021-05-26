@@ -1,5 +1,5 @@
-#ifndef BOSS_H
-#define BOSS_H
+#ifndef WOB_BOSS_H
+#define WOB_BOSS_H
 
 
 class Boss
@@ -10,4 +10,4 @@ private:
     static int hp;
 };
 
-#endif // BOSS_H
+#endif // WOB_BOSS_H

@@ -1,7 +1,7 @@
 #include "StarObj.h"
 #include <cmath>
 
-#include "Core/Drawer.h"
+#include "Core/Draw.h"
 
 StarObj::StarObj(Vector2 p_position, std::string p_textureID, float p_angle, float p_diametre)
     : Entity(p_position, p_textureID, p_angle), m_diametre(p_diametre)
@@ -26,17 +26,17 @@ StarObj::StarObj(Vector2 p_position, std::string p_textureID, float p_angle, flo
     };
 
     m_losa = {
-        m_position + RotationTransform(m_rect.p1 - m_position, M_PI / 4.f),
-        m_position + RotationTransform(m_rect.p2 - m_position, M_PI / 4.f),
-        m_position + RotationTransform(m_rect.p3 - m_position, M_PI / 4.f),
-        m_position + RotationTransform(m_rect.p4 - m_position, M_PI / 4.f)
+        m_position + RotationTransform(m_rect.p1 - m_position, Pi / 4.f),
+        m_position + RotationTransform(m_rect.p2 - m_position, Pi / 4.f),
+        m_position + RotationTransform(m_rect.p3 - m_position, Pi / 4.f),
+        m_position + RotationTransform(m_rect.p4 - m_position, Pi / 4.f)
     };
 
     m_losaCrit = {
-        m_rectCrit.p1 += M_PI / 4.f,
-        m_rectCrit.p2 += M_PI / 4.f,
-        m_rectCrit.p3 += M_PI / 4.f,
-        m_rectCrit.p4 += M_PI / 4.f
+        m_rectCrit.p1 += Pi / 4.f,
+        m_rectCrit.p2 += Pi / 4.f,
+        m_rectCrit.p3 += Pi / 4.f,
+        m_rectCrit.p4 += Pi / 4.f
     };
 
     float beta = 0.414f * m_diametre;
@@ -75,10 +75,10 @@ void StarObj::UpdateStarPositions()
     };
 
     m_losa = {
-        m_position + RotationTransform(m_rect.p1 - m_position, M_PI / 4.f),
-        m_position + RotationTransform(m_rect.p2 - m_position, M_PI / 4.f),
-        m_position + RotationTransform(m_rect.p3 - m_position, M_PI / 4.f),
-        m_position + RotationTransform(m_rect.p4 - m_position, M_PI / 4.f)
+        m_position + RotationTransform(m_rect.p1 - m_position, Pi / 4.f),
+        m_position + RotationTransform(m_rect.p2 - m_position, Pi / 4.f),
+        m_position + RotationTransform(m_rect.p3 - m_position, Pi / 4.f),
+        m_position + RotationTransform(m_rect.p4 - m_position, Pi / 4.f)
     };
 
     float beta = 0.414f * m_diametre;
@@ -111,9 +111,9 @@ void StarObj::StarCollision(const StarObj *mob)
         // 2 cas ici -> si T(vx) positif -> return {  vx, -vy }
         //              si T(vx) negatif -> return { -vx,  vy }
         Vector2 tmp5,tmp1,tmpv;
-        tmpv = RotationTransform(this->GetVitesse(), M_PI / 4.f);
-        tmp5 = RotationTransform(this->GetOctogone().p5, M_PI / 4.f);
-        tmp1 = RotationTransform(mob->GetOctogone().p1, M_PI / 4.f);
+        tmpv = RotationTransform(this->GetVitesse(), Pi / 4.f);
+        tmp5 = RotationTransform(this->GetOctogone().p5, Pi / 4.f);
+        tmp1 = RotationTransform(mob->GetOctogone().p1, Pi / 4.f);
 
         if (tmp5.y < tmp1.y && tmpv.y < 0.f)
         {
@@ -133,9 +133,9 @@ void StarObj::StarCollision(const StarObj *mob)
         // 2 cas ici -> si T(vy) positif -> return {  vx,  vy }
         //              si T(vy) negatif -> return { -vx, -vy }
         Vector2 tmp8,tmp4,tmpv;
-        tmpv = RotationTransform(this->GetVitesse(), M_PI / 4.f);
-        tmp8 = RotationTransform(this->GetOctogone().p8, M_PI / 4.f);
-        tmp4 = RotationTransform(mob->GetOctogone().p4, M_PI / 4.f);
+        tmpv = RotationTransform(this->GetVitesse(), Pi / 4.f);
+        tmp8 = RotationTransform(this->GetOctogone().p8, Pi / 4.f);
+        tmp4 = RotationTransform(mob->GetOctogone().p4, Pi / 4.f);
         if (tmp8.x > tmp4.x && tmpv.x > 0.f)
         {
             if (tmpv.y > 0.f)
@@ -154,9 +154,9 @@ void StarObj::StarCollision(const StarObj *mob)
         // 2 cas ici -> si T(vx) positif -> return {  vx, -vy }
         //              si T(vx) negatif -> return { -vx,  vy }
         Vector2 tmp1,tmp5,tmpv;
-        tmpv = RotationTransform(this->GetVitesse(), M_PI / 4.f);
-        tmp1 = RotationTransform(this->GetOctogone().p1, M_PI / 4.f);
-        tmp5 = RotationTransform(mob->GetOctogone().p5, M_PI / 4.f);
+        tmpv = RotationTransform(this->GetVitesse(), Pi / 4.f);
+        tmp1 = RotationTransform(this->GetOctogone().p1, Pi / 4.f);
+        tmp5 = RotationTransform(mob->GetOctogone().p5, Pi / 4.f);
         if (tmp1.y > tmp5.y && tmpv.y > 0.f)
         {
             if (tmpv.x > 0.f)
@@ -175,9 +175,9 @@ void StarObj::StarCollision(const StarObj *mob)
         // 2 cas ici -> si T(vy) positif -> return {  vx,  vy }
         //              si T(vy) negatif -> return { -vx, -vy }
         Vector2 tmp4,tmp7,tmpv;
-        tmpv = RotationTransform(this->GetVitesse(), M_PI / 4.f);
-        tmp4 = RotationTransform(this->GetOctogone().p4, M_PI / 4.f);
-        tmp7 = RotationTransform(mob->GetOctogone().p7, M_PI / 4.f);
+        tmpv = RotationTransform(this->GetVitesse(), Pi / 4.f);
+        tmp4 = RotationTransform(this->GetOctogone().p4, Pi / 4.f);
+        tmp7 = RotationTransform(mob->GetOctogone().p7, Pi / 4.f);
         if (tmp4.x < tmp7.x && tmpv.x < 0.f)
         {
             if (tmpv.y > 0.f)
@@ -202,9 +202,9 @@ void StarObj::OctogoneCollision(const OctogoneObj *oob)
         // 2 cas ici -> si T(vx) positif -> return {  vx, -vy }
         //              si T(vx) negatif -> return { -vx,  vy }
         Vector2 tmp5,tmp1,tmpv;
-        tmpv = RotationTransform(this->GetVitesse(), M_PI / 4.f);
-        tmp5 = RotationTransform(this->GetOctogone().p5, M_PI / 4.f);
-        tmp1 = RotationTransform(oob->GetOctogone().p1, M_PI / 4.f);
+        tmpv = RotationTransform(this->GetVitesse(), Pi / 4.f);
+        tmp5 = RotationTransform(this->GetOctogone().p5, Pi / 4.f);
+        tmp1 = RotationTransform(oob->GetOctogone().p1, Pi / 4.f);
         if (tmp5.y < tmp1.y && tmpv.y < 0.f)
         {
             if (tmpv.x > 0.f)
@@ -223,9 +223,9 @@ void StarObj::OctogoneCollision(const OctogoneObj *oob)
         // 2 cas ici -> si T(vy) positif -> return {  vx,  vy }
         //              si T(vy) negatif -> return { -vx, -vy }
         Vector2 tmp8,tmp4,tmpv;
-        tmpv = RotationTransform(this->GetVitesse(), M_PI / 4.f);
-        tmp8 = RotationTransform(this->GetOctogone().p8, M_PI / 4.f);
-        tmp4 = RotationTransform(oob->GetOctogone().p4, M_PI / 4.f);
+        tmpv = RotationTransform(this->GetVitesse(), Pi / 4.f);
+        tmp8 = RotationTransform(this->GetOctogone().p8, Pi / 4.f);
+        tmp4 = RotationTransform(oob->GetOctogone().p4, Pi / 4.f);
         if (tmp8.x > tmp4.x && tmpv.x > 0.f)
         {
             if (tmpv.y > 0.f)
@@ -244,9 +244,9 @@ void StarObj::OctogoneCollision(const OctogoneObj *oob)
         // 2 cas ici -> si T(vx) positif -> return {  vx, -vy }
         //              si T(vx) negatif -> return { -vx,  vy }
         Vector2 tmp1,tmp5,tmpv;
-        tmpv = RotationTransform(this->GetVitesse(), M_PI / 4.f);
-        tmp1 = RotationTransform(this->GetOctogone().p1, M_PI / 4.f);
-        tmp5 = RotationTransform(oob->GetOctogone().p5, M_PI / 4.f);
+        tmpv = RotationTransform(this->GetVitesse(), Pi / 4.f);
+        tmp1 = RotationTransform(this->GetOctogone().p1, Pi / 4.f);
+        tmp5 = RotationTransform(oob->GetOctogone().p5, Pi / 4.f);
         if (tmp1.y > tmp5.y && tmpv.y > 0.f)
         {
             if (tmpv.x > 0.f)
@@ -265,9 +265,9 @@ void StarObj::OctogoneCollision(const OctogoneObj *oob)
         // 2 cas ici -> si T(vy) positif -> return {  vx,  vy }
         //              si T(vy) negatif -> return { -vx, -vy }
         Vector2 tmp4,tmp7,tmpv;
-        tmpv = RotationTransform(this->GetVitesse(), M_PI / 4.f);
-        tmp4 = RotationTransform(this->GetOctogone().p4, M_PI / 4.f);
-        tmp7 = RotationTransform(oob->GetOctogone().p7, M_PI / 4.f);
+        tmpv = RotationTransform(this->GetVitesse(), Pi / 4.f);
+        tmp4 = RotationTransform(this->GetOctogone().p4, Pi / 4.f);
+        tmp7 = RotationTransform(oob->GetOctogone().p7, Pi / 4.f);
         if (tmp4.x < tmp7.x && tmpv.x < 0.f)
         {
             if (tmpv.y > 0.f)
@@ -320,20 +320,22 @@ void StarObj::LosangeCollision(const LosangeObj *lob)
     float p3Rel = RelativeAngle(lob->GetPosition(), m_losa.p3);
     float p4Rel = RelativeAngle(lob->GetPosition(), m_losa.p4);
 
+
+
     if ((p3Rel > lob->GetCritLosa().p1 && p3Rel <= lob->GetCritLosa().p2) || (p4Rel > lob->GetCritLosa().p1 && p4Rel <= lob->GetCritLosa().p2))
     {
         // 2 cas ici -> si T(vx) positif -> return {  vx, -vy }
         //              si T(vx) negatif -> return { -vx,  vy }
-        Vector2 tmp5,tmp1,tmpv;
-        tmpv = RotationTransform(this->GetVitesse(), M_PI / 4.f);
-        tmp5 = RotationTransform(this->GetOctogone().p5, M_PI / 4.f);
-        tmp1 = RotationTransform(lob->GetLosa().p1, M_PI / 4.f);
-        if (tmp5.y < tmp1.y && tmpv.y < 0.f)
+        Vector2 tmp4,tmp1,tmpv;
+        tmpv = RotationTransform(this->GetVitesse(), Pi / 4.f);
+        tmp4 = RotationTransform(this->GetLosa().p4, Pi / 4.f);
+        tmp1 = RotationTransform(lob->GetLosa().p1, Pi / 4.f);
+        if (tmp4.x > tmp1.x && tmpv.x > 0.f)
         {
-            if (tmpv.x > 0.f)
-                m_vitesse = Vector2 { std::sqrt((tmpv.x * tmpv.x) / 2.f), - std::sqrt((tmpv.x * tmpv.x) / 2.f) };
+            if (tmpv.y > 0.f)
+                m_vitesse = Vector2 {  std::sqrt((tmpv.y * tmpv.y) / 2.f),  std::sqrt((tmpv.y * tmpv.y) / 2.f) };
             else
-                m_vitesse = Vector2 { - std::sqrt((tmpv.x * tmpv.x) / 2.f), std::sqrt((tmpv.x * tmpv.x) / 2.f) };
+                m_vitesse = Vector2 { -std::sqrt((tmpv.y * tmpv.y) / 2.f), -std::sqrt((tmpv.y * tmpv.y) / 2.f) };
         }
     }
     else if((p1Rel > lob->GetCritLosa().p2 && p1Rel <= lob->GetCritLosa().p3) || (p4Rel > lob->GetCritLosa().p2 && p4Rel <= lob->GetCritLosa().p3))
@@ -341,9 +343,9 @@ void StarObj::LosangeCollision(const LosangeObj *lob)
         // 2 cas ici -> si T(vy) positif -> return {  vx,  vy }
         //              si T(vy) negatif -> return { -vx, -vy }
         Vector2 tmp8,tmp4,tmpv;
-        tmpv = RotationTransform(this->GetVitesse(), M_PI / 4.f);
-        tmp8 = RotationTransform(this->GetOctogone().p8, M_PI / 4.f);
-        tmp4 = RotationTransform(lob->GetLosa().p4, M_PI / 4.f);
+        tmpv = RotationTransform(this->GetVitesse(), Pi / 4.f);
+        tmp8 = RotationTransform(this->GetOctogone().p8, Pi / 4.f);
+        tmp4 = RotationTransform(lob->GetLosa().p4, Pi / 4.f);
         if (tmp8.x > tmp4.x && tmpv.x > 0.f)
         {
             if (tmpv.y > 0.f)
@@ -357,15 +359,15 @@ void StarObj::LosangeCollision(const LosangeObj *lob)
         // 2 cas ici -> si T(vx) positif -> return {  vx, -vy }
         //              si T(vx) negatif -> return { -vx,  vy }
         Vector2 tmp1,tmp5,tmpv;
-        tmpv = RotationTransform(this->GetVitesse(), M_PI / 4.f);
-        tmp1 = RotationTransform(this->GetOctogone().p1, M_PI / 4.f);
-        tmp5 = RotationTransform(lob->GetLosa().p3, M_PI / 4.f);
+        tmpv = RotationTransform(this->GetVitesse(), Pi / 4.f);
+        tmp1 = RotationTransform(this->GetOctogone().p1, Pi / 4.f);
+        tmp5 = RotationTransform(lob->GetLosa().p3, Pi / 4.f);
         if (tmp1.y > tmp5.y && tmpv.y > 0.f)
         {
             if (tmpv.x > 0.f)
-                m_vitesse = Vector2 { std::sqrt((tmpv.x * tmpv.x) / 2.f), - std::sqrt((tmpv.x * tmpv.x) / 2.f) };
+                m_vitesse = Vector2 {  std::sqrt((tmpv.x * tmpv.x) / 2.f), -std::sqrt((tmpv.x * tmpv.x) / 2.f) };
             else
-                m_vitesse = Vector2 { - std::sqrt((tmpv.x * tmpv.x) / 2.f), std::sqrt((tmpv.x * tmpv.x) / 2.f) };
+                m_vitesse = Vector2 { -std::sqrt((tmpv.x * tmpv.x) / 2.f),  std::sqrt((tmpv.x * tmpv.x) / 2.f) };
         }
     }
     else if((p2Rel > lob->GetCritLosa().p3 || p2Rel <= lob->GetCritLosa().p4) || (p3Rel > lob->GetCritLosa().p3 || p3Rel <= lob->GetCritLosa().p4))
@@ -373,16 +375,25 @@ void StarObj::LosangeCollision(const LosangeObj *lob)
         // 2 cas ici -> si T(vy) positif -> return {  vx,  vy }
         //              si T(vy) negatif -> return { -vx, -vy }
         Vector2 tmp4,tmp7,tmpv;
-        tmpv = RotationTransform(this->GetVitesse(), M_PI / 4.f);
-        tmp4 = RotationTransform(this->GetOctogone().p4, M_PI / 4.f);
-        tmp7 = RotationTransform(lob->GetLosa().p1, M_PI / 4.f);
+        tmpv = RotationTransform(this->GetVitesse(), Pi / 4.f);
+        tmp4 = RotationTransform(this->GetOctogone().p4, Pi / 4.f);
+        tmp7 = RotationTransform(lob->GetLosa().p1, Pi / 4.f);
         if (tmp4.x < tmp7.x && tmpv.x < 0.f)
         {
             if (tmpv.y > 0.f)
-                m_vitesse = Vector2 {   std::sqrt((tmpv.y * tmpv.y) / 2.f),   std::sqrt((tmpv.y * tmpv.y) / 2.f) };
+                m_vitesse = Vector2 {  std::sqrt((tmpv.y * tmpv.y) / 2.f),  std::sqrt((tmpv.y * tmpv.y) / 2.f) };
             else
-                m_vitesse = Vector2 { - std::sqrt((tmpv.y * tmpv.y) / 2.f), - std::sqrt((tmpv.y * tmpv.y) / 2.f) };
+                m_vitesse = Vector2 { -std::sqrt((tmpv.y * tmpv.y) / 2.f), -std::sqrt((tmpv.y * tmpv.y) / 2.f) };
         }
+    }
+
+    if (lob->GetWidth() > lob->GetHeight())
+    {
+
+    }
+    else
+    {
+
     }
 }
 

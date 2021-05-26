@@ -1,6 +1,6 @@
 #include "LosangeObj.h"
 #include <cmath>
-#include "Core/Drawer.h"
+#include "Core/Draw.h"
 
 LosangeObj::LosangeObj(Vector2 p_position, std::string p_textureID, float p_angle, float p_width, float p_height)
     : Entity(p_position, p_textureID, p_angle), m_width(p_width), m_height(p_height)
@@ -15,26 +15,26 @@ LosangeObj::LosangeObj(Vector2 p_position, std::string p_textureID, float p_angl
     };
 
     m_losa = {
-        m_position + RotationTransform(tmpRect.p1 - m_position, M_PI / 4.f),
-        m_position + RotationTransform(tmpRect.p2 - m_position, M_PI / 4.f),
-        m_position + RotationTransform(tmpRect.p3 - m_position, M_PI / 4.f),
-        m_position + RotationTransform(tmpRect.p4 - m_position, M_PI / 4.f)
+        m_position + RotationTransform(tmpRect.p1 - m_position, Pi / 4.f),
+        m_position + RotationTransform(tmpRect.p2 - m_position, Pi / 4.f),
+        m_position + RotationTransform(tmpRect.p3 - m_position, Pi / 4.f),
+        m_position + RotationTransform(tmpRect.p4 - m_position, Pi / 4.f)
     };
 
     float angleImportant = std::atan(m_height / m_width);
 
     CriticalAngles tmpCrit = {
-        (2.f * M_PI) - angleImportant,
+        (2.f * Pi) - angleImportant,
         angleImportant,
-        M_PI - angleImportant,
-        M_PI + angleImportant
+        Pi - angleImportant,
+        Pi + angleImportant
     };
 
     m_losaCrit = {
-        tmpCrit.p1 += M_PI / 4.f,
-        tmpCrit.p2 += M_PI / 4.f,
-        tmpCrit.p3 += M_PI / 4.f,
-        tmpCrit.p4 += M_PI / 4.f
+        tmpCrit.p1 += Pi / 4.f,
+        tmpCrit.p2 += Pi / 4.f,
+        tmpCrit.p3 += Pi / 4.f,
+        tmpCrit.p4 += Pi / 4.f
     };
 
     if (m_width > m_height)
@@ -60,9 +60,9 @@ void LosangeObj::UpdateRectPosition()
     };
 
     m_losa = {
-        m_position + RotationTransform(tmpRect.p1 - m_position, M_PI / 4.f),
-        m_position + RotationTransform(tmpRect.p2 - m_position, M_PI / 4.f),
-        m_position + RotationTransform(tmpRect.p3 - m_position, M_PI / 4.f),
-        m_position + RotationTransform(tmpRect.p4 - m_position, M_PI / 4.f)
+        m_position + RotationTransform(tmpRect.p1 - m_position, Pi / 4.f),
+        m_position + RotationTransform(tmpRect.p2 - m_position, Pi / 4.f),
+        m_position + RotationTransform(tmpRect.p3 - m_position, Pi / 4.f),
+        m_position + RotationTransform(tmpRect.p4 - m_position, Pi / 4.f)
     };
 }

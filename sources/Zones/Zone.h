@@ -2,8 +2,8 @@
 // Created by scott on 4/2/2021.
 //
 
-#ifndef WOB1_ZONE_H
-#define WOB1_ZONE_H
+#ifndef WOB_ZONE_H
+#define WOB_ZONE_H
 
 //#include "ZoneTopologie.h"
 #include "GameObject/Monsters.h"
@@ -66,4 +66,4 @@ public:
 };
 
 
-#endif //WOB1_ZONE_H
+#endif //WOB_ZONE_H

@@ -1,5 +1,5 @@
-#ifndef ZONEMANAGER_H
-#define ZONEMANAGER_H
+#ifndef WOB_ZONEMANAGER_H
+#define WOB_ZONEMANAGER_H
 
 #include <unordered_map>
 #include "Zone.h"
@@ -40,4 +40,4 @@ public:
     static void ChangeZoneRight(Player* p);
 };
 
-#endif // ZONEMANAGER_H
+#endif // WOB_ZONEMANAGER_H

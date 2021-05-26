@@ -1,5 +1,5 @@
-#ifndef ZONETOPOLOGIE_H
-#define ZONETOPOLOGIE_H
+#ifndef WOB_ZONETOPOLOGIE_H
+#define WOB_ZONETOPOLOGIE_H
 
 #include <tuple>
 #include <map>
@@ -236,4 +236,4 @@ struct ZoneTopologie
 };
 
 
-#endif // ZONETOPOLOGIE_H
+#endif // WOB_ZONETOPOLOGIE_H

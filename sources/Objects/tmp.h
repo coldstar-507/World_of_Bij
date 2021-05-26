@@ -2,8 +2,8 @@
 // Created by scott on 4/1/2021.
 //
 
-#ifndef WOB1_MOVINGOBJECT_H
-#define WOB1_MOVINGOBJECT_H
+#ifndef WOB_MOVINGOBJECT_H
+#define WOB_MOVINGOBJECT_H
 
 #include "SolideObject.h"
 #include <vector>
@@ -50,4 +50,4 @@ public:
 };
 
 
-#endif //WOB1_MOVINGOBJECT_H
+#endif //WOB_MOVINGOBJECT_H

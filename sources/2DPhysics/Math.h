@@ -1,11 +1,12 @@
 //
 // Created by scott on 4/1/2021.
 //
-#ifndef WOB1_MATH_H
-#define WOB1_MATH_H
+#ifndef WOB_MATH_H
+#define WOB_MATH_H
 
 #include <iostream>
 
+constexpr float Pi = 3.14159265359f;
 
 struct Vector2
 {
@@ -86,24 +87,5 @@ float RelativeAngle(const Vector2& p1, const Vector2& p2);
 Vector2 RotationTransform(const Vector2& p, float angle);
 
 Vector2 RandomPoint();
-
-void PrintV2(const Vector2 & v, const char* msg);
-
-
-class Loger
-{
-private:
-    Loger() = default;
-    ~Loger() = default;
-    static int i;
-public:
-    static void logi() { std::cout << "LOGER : " << i << std::endl; i++; }
-    static void resetLogi() { i = 0; }
-
-    template <typename T2>
-    static void log(T2 msg) { std::cout << "LOGER : " << msg << std::endl; }
-
-
-};
 
 #endif //WOB1_MATH_H

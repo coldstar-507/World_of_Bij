@@ -3,7 +3,7 @@
 //
 
 #include "RectangleObj.h"
-#include "Core/Drawer.h"
+#include "Core/Draw.h"
 
 RectangleObj::RectangleObj(Vector2 p_position, std::string p_textureID, float p_angle, float p_width, float p_height)
     : Entity(p_position, p_textureID, p_angle), m_width(p_width), m_height(p_height)
@@ -19,9 +19,9 @@ RectangleObj::RectangleObj(Vector2 p_position, std::string p_textureID, float p_
     float angleImportant = std::atan(m_height / m_width);
     m_rectCrit = {
         angleImportant,
-        M_PIf32 - angleImportant,
-        M_PIf32 + angleImportant,
-        (2.f * M_PIf32) - angleImportant
+        Pi - angleImportant,
+        Pi + angleImportant,
+        (2.f * Pi) - angleImportant
     };
 
     if (m_width > m_height)

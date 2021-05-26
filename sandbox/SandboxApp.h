@@ -9,10 +9,11 @@
 #include "Texture/TextureBank.h"
 #include "Core/Timer.h"
 #include "Core/Camera.h"
-#include "Core/Drawer.h"
+#include "Core/Draw.h"
 #include "2DPhysics/Math.h"
 #include "Zones/ZoneManager.h"
 #include "Objects/Player.h"
+#include "Core/Loger.h"
 
 #include "SDL.h"
 #include "SDL_image.h"

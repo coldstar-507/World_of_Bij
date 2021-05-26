@@ -2,8 +2,8 @@
 // Created by scott on 4/1/2021.
 //
 
-#ifndef WOB1_TEXTURE_H
-#define WOB1_TEXTURE_H
+#ifndef WOB_TEXTURE_H
+#define WOB_TEXTURE_H
 
 #include <string>
 #include "SDL_image.h"
@@ -28,4 +28,4 @@ private:
 };
 
 
-#endif //WOB1_TEXTURE_H
+#endif //WOB_TEXTURE_H

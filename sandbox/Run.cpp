@@ -4,9 +4,9 @@
 
 #include "SandboxApp.h"
 
-#if _WIN32
+#if __MINGW32__
 
-int WinMain()
+int WinMain(int argc, char* argv[])
 {
     SandboxApp::Init();
     Timer t(10);
@@ -32,7 +32,7 @@ int WinMain()
 
 #else
 
-int main()
+int main(int argc, char* argv[])
 {
     SandboxApp::Init();
     Timer t(10); // Environ 17 pour 60 fps // it does work now

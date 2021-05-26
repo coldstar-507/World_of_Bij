@@ -2,8 +2,8 @@
 // Created by scott on 4/1/2021.
 //
 
-#ifndef WOB1_ENGINE_H
-#define WOB1_ENGINE_H
+#ifndef WOB_ENGINE_H
+#define WOB_ENGINE_H
 
 #include "SDL.h"
 #include "meta.h"
@@ -31,4 +31,4 @@ private:
 };
 
 
-#endif //WOB1_ENGINE_H
+#endif //WOB_ENGINE_H

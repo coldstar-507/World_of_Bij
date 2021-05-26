@@ -2,9 +2,9 @@
 #include <SDL.h>
 #include "Core/Engine.h"
 
-#ifdef _WIN32
+#ifdef __MINGW32__
 
-int WinMain()
+int WinMain(int argc, char* argv[])
 {
     Engine::Init();
     Timer t(10);
@@ -31,7 +31,7 @@ int WinMain()
 
 #else
 
-int main()
+int main(int argc, char* argv[])
 {
     Engine::Init();
     Timer t(17); // makes sure the stuff between t.start() and t.delay() takes 17 ms, about 60 fps
