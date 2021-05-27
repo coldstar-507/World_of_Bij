@@ -34,9 +34,7 @@ void SandboxApp::Render()
     ZoneManager::CurrentZone()->DrawRects();
     ZoneManager::CurrentZone()->DrawStars();
 
-    Draw("alexcropped", { 450.f, 450.f });
-
-    player->DrawTargetCircles();
+	player->DrawTargetCircles();
     //player->DrawMonsterTarget();
 
 
@@ -56,100 +54,129 @@ void SandboxApp::Loop()
 
 void SandboxApp::Events(SDL_Event *event)
 {
-    if (event->key.repeat == 0)
-    {
-        switch (event->type)
-        {
-        case SDL_MOUSEWHEEL:
-            if (event->wheel.y > 0) // scroll up
-            {
-                Camera::Zoom(1.05f);
-            }
-            else if (event->wheel.y < 0) // scroll down
-            {
-                Camera::Zoom(0.95f);
-            }
-            break;
-        case SDL_KEYDOWN:
-            switch (event->key.keysym.sym)
-            {
-            case SDLK_LSHIFT:
-                player->SlowlyMoving();
-                break;
-            case SDLK_TAB:
-                //player->TargetMonsters(ZoneManager::CurrentZone()->m_monstersVector);
-                Loger::log(player->m_monsterTarget);
-                break;
-            case SDLK_ESCAPE:
-                SandboxApp::Stop();
-                break;
-            case SDLK_RIGHT:
-                player->StrafingRight();
-                break;
-            case SDLK_LEFT:
-                player->StrafingLeft();
-                break;
-            case SDLK_UP:
-                player->MovingUp();
-                break;
-            case SDLK_DOWN:
-                player->MovingDown();
-                break;
-            case SDLK_d:
-                player->StrafingRight();
-                break;
-            case SDLK_s:
-                player->MovingDown();
-                break;
-            case SDLK_a:
-                player->StrafingLeft();
-                break;
-            case SDLK_w:
-                player->MovingUp();
-                break;
-            }
-            break;
-        case SDL_KEYUP:
-            switch (event->key.keysym.sym)
-            {
-            case SDLK_LSHIFT:
-                player->NotSlowlyMoving();
-                break;
-            case SDLK_RIGHT:
-                player->NotStrafingRight();
-                break;
-            case SDLK_LEFT:
-                player->NotStrafingLeft();
-                break;
-            case SDLK_UP:
-                player->NotMovingUp();
-                break;
-            case SDLK_DOWN:
-                player->NotMovingDown();
-                break;
-            case SDLK_d:
-                player->NotStrafingRight();
-                break;
-            case SDLK_s:
-                player->NotMovingDown();
-                break;
-            case SDLK_a:
-                player->NotStrafingLeft();
-                break;
-            case SDLK_w:
-                player->NotMovingUp();
-                break;
-            }
-        case SDL_MOUSEBUTTONDOWN:
-            break;
-        case SDL_MOUSEMOTION:
-            SDL_GetMouseState(player->GetMouseXYAdress().first, player->GetMouseXYAdress().second);
-            break;
-        case SDL_QUIT:
-            SandboxApp::Stop();
-            break;
-        }
-    }
+	if (event->key.repeat == 0)
+	{
+		switch (event->type)
+		{
+		case SDL_MOUSEWHEEL:
+			if (event->wheel.y > 0) // scroll up
+			{
+				Camera::Zoom(1.05f);
+			}
+			else if (event->wheel.y < 0) // scroll down
+			{
+				Camera::Zoom(0.95f);
+			}
+			break;
+		case SDL_KEYDOWN:
+			switch (event->key.keysym.sym)
+			{
+			case SDLK_LSHIFT:
+				player->SlowlyMoving();
+				break;
+			case SDLK_TAB:
+				//player->TargetMonsters(ZoneManager::CurrentZone()->m_monstersVector);
+				Loger::log(player->m_monsterTarget);
+				break;
+			case SDLK_ESCAPE:
+				SandboxApp::Stop();
+				break;
+			case SDLK_RIGHT:
+				player->StrafingRight();
+				break;
+			case SDLK_LEFT:
+				player->StrafingLeft();
+				break;
+			case SDLK_UP:
+				player->MovingUp();
+				break;
+			case SDLK_DOWN:
+				player->MovingDown();
+				break;
+			case SDLK_d:
+				player->StrafingRight();
+				break;
+			case SDLK_s:
+				player->MovingDown();
+				break;
+			case SDLK_a:
+				player->StrafingLeft();
+				break;
+			case SDLK_w:
+				player->MovingUp();
+				break;
+			}
+			break;
+
+		case SDL_KEYUP:
+			switch (event->key.keysym.sym)
+			{
+			case SDLK_LSHIFT:
+				player->NotSlowlyMoving();
+				break;
+			case SDLK_RIGHT:
+				player->NotStrafingRight();
+				break;
+			case SDLK_LEFT:
+				player->NotStrafingLeft();
+				break;
+			case SDLK_UP:
+				player->NotMovingUp();
+				break;
+			case SDLK_DOWN:
+				player->NotMovingDown();
+				break;
+			case SDLK_d:
+				player->NotStrafingRight();
+				break;
+			case SDLK_s:
+				player->NotMovingDown();
+				break;
+			case SDLK_a:
+				player->NotStrafingLeft();
+				break;
+			case SDLK_w:
+				player->NotMovingUp();
+				break;
+			}
+		case SDL_MOUSEBUTTONDOWN:
+			switch (event->button.button)
+			{
+			case SDL_BUTTON_LEFT:
+				Loger::log("Pressed left button");
+				break;
+			case SDL_BUTTON_RIGHT:
+				Loger::log("Pressed right button");
+				player->m_pollingMouse = true;
+				break;
+			case SDL_BUTTON_MIDDLE:
+				Loger::log("Pressed middle button");
+				break;
+			}
+			break;
+		case SDL_MOUSEBUTTONUP:
+			switch (event->button.button)
+			{
+			case SDL_BUTTON_LEFT:
+				Loger::log("Left button released");
+				break;
+			case SDL_BUTTON_RIGHT:
+				Loger::log("Right button released");
+				player->m_pollingMouse = false;
+				break;
+			case SDL_BUTTON_MIDDLE:
+				Loger::log("Middle button released");
+				break;
+			}
+			break;
+		case SDL_MOUSEMOTION:
+			SDL_GetMouseState(player->GetMouseXYAdress().first, player->GetMouseXYAdress().second);
+			break;
+		case SDL_QUIT:
+			SandboxApp::Stop();
+			break;
+		}
+	}
 }
 
 void SandboxApp::Quit()

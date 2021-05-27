@@ -79,7 +79,8 @@ void Player::MovementRoutine(const std::vector<OctogoneObj*> & p_oov, const std:
     LeftStrafe();
     RightStrafe();
     CalculateMousePosition();
-    CalculateAngleFromMouse();
+    if (m_pollingMouse)
+		CalculateAngleFromMouse();
     CalculateVitesse();
     CheckCollisions(p_oov, p_rov, p_lov, p_mov);
     ApplyVitesse();

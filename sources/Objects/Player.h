@@ -19,6 +19,8 @@ private:
     Vector2 m_mousePosition;
     int m_mouseX, m_mouseY; // Need this because that's how SDL works
 public:
+    bool m_pollingMouse = 0;
+
     Monsters* m_monsterTarget = nullptr;
 
     std::pair<int*,int*> GetMouseXYAdress() { return { &m_mouseX, &m_mouseY }; }
