@@ -26,8 +26,16 @@ Zone::Zone(int nbRects, int nbLosanges, int nbOcts, int nbMovs, Player* p)
 
     for (int i = 0; i < nbLosanges; i++)
     {
-        m_losangeObjectVector.push_back(new LosangeObj(RandomPoint(), "empty", 0.f, 90.f, 120.f));
-        m_entityVector.push_back(m_losangeObjectVector[i]);
+        if (i % 2)
+        {
+            m_losangeObjectVector.push_back(new LosangeObj(RandomPoint(), "empty", 0.f, 90.f, 120.f));
+            m_entityVector.push_back(m_losangeObjectVector[i]);
+        }
+        else
+        {
+            m_losangeObjectVector.push_back(new LosangeObj(RandomPoint(), "empty", 0.f, 190.f, 120.f));
+            m_entityVector.push_back(m_losangeObjectVector[i]);
+        }
     }
 
     for (int i = 0; i < nbOcts; i++)

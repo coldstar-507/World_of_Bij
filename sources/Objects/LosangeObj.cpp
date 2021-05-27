@@ -1,6 +1,7 @@
 #include "LosangeObj.h"
 #include <cmath>
 #include "Core/Draw.h"
+#include "Core/Loger.h"
 
 LosangeObj::LosangeObj(Vector2 p_position, std::string p_textureID, float p_angle, float p_width, float p_height)
     : Entity(p_position, p_textureID, p_angle), m_width(p_width), m_height(p_height)
@@ -24,17 +25,17 @@ LosangeObj::LosangeObj(Vector2 p_position, std::string p_textureID, float p_angl
     float angleImportant = std::atan(m_height / m_width);
 
     CriticalAngles tmpCrit = {
-        (2.f * Pi) - angleImportant,
         angleImportant,
         Pi - angleImportant,
-        Pi + angleImportant
+        Pi + angleImportant,
+        2.f * Pi - angleImportant
     };
 
     m_losaCrit = {
-        tmpCrit.p1 += Pi / 4.f,
-        tmpCrit.p2 += Pi / 4.f,
-        tmpCrit.p3 += Pi / 4.f,
-        tmpCrit.p4 += Pi / 4.f
+        tmpCrit.p1 + Pi / 4.f,
+        tmpCrit.p2 + Pi / 4.f,
+        tmpCrit.p3 + Pi / 4.f,
+        NormalizeRad(tmpCrit.p4 + Pi / 4.f)
     };
 
     if (m_width > m_height)

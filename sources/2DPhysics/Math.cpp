@@ -56,6 +56,14 @@ float RelativeAngle(const Vector2& p1, const Vector2& p2)
     }
 }
 
+float NormalizeRad(float rad)
+{
+    if (rad >= 2.f * Pi)
+        NormalizeRad(rad - 2.f * Pi);
+    else
+        return rad;
+}
+
 Vector2 RandomPoint()
 {
     return { (float) (rand() % REGION_SIZE_X), (float) (rand() % REGION_SIZE_Y) };

@@ -1,5 +1,6 @@
 #include "StarObj.h"
 #include <cmath>
+#include "Core/Loger.h"
 
 #include "Core/Draw.h"
 
@@ -33,10 +34,10 @@ StarObj::StarObj(Vector2 p_position, std::string p_textureID, float p_angle, flo
     };
 
     m_losaCrit = {
-        m_rectCrit.p1 += Pi / 4.f,
-        m_rectCrit.p2 += Pi / 4.f,
-        m_rectCrit.p3 += Pi / 4.f,
-        m_rectCrit.p4 += Pi / 4.f
+        m_rectCrit.p1 + Pi / 4.f,
+        m_rectCrit.p2 + Pi / 4.f,
+        m_rectCrit.p3 + Pi / 4.f,
+        NormalizeRad(m_rectCrit.p4 + Pi / 4.f)
     };
 
     float beta = 0.414f * m_diametre;
@@ -306,7 +307,7 @@ void StarObj::RectangleCollision(const RectangleObj *rob)
         if (this->GetRect().p1.y > rob->GetRect().p3.y && m_vitesse.y > 0.f)
             m_vitesse.y = 0.f;
     }
-    else if ((p2Rel > rob->GetRectCrit().p3 || p2Rel <= rob->GetRectCrit().p4) || (p3Rel > rob->GetRectCrit().p3 || p3Rel <= rob->GetRectCrit().p4))
+    else //if ((p2Rel > rob->GetRectCrit().p3 || p2Rel <= rob->GetRectCrit().p4) || (p3Rel > rob->GetRectCrit().p3 || p3Rel <= rob->GetRectCrit().p4))
     {
         if (this->GetRect().p3.x < rob->GetRect().p1.x && m_vitesse.x < 0.f)
             m_vitesse.x = 0.f;
@@ -320,80 +321,133 @@ void StarObj::LosangeCollision(const LosangeObj *lob)
     float p3Rel = RelativeAngle(lob->GetPosition(), m_losa.p3);
     float p4Rel = RelativeAngle(lob->GetPosition(), m_losa.p4);
 
-
-
-    if ((p3Rel > lob->GetCritLosa().p1 && p3Rel <= lob->GetCritLosa().p2) || (p4Rel > lob->GetCritLosa().p1 && p4Rel <= lob->GetCritLosa().p2))
+    if (lob->GetHeight() > lob->GetWidth())
     {
-        // 2 cas ici -> si T(vx) positif -> return {  vx, -vy }
-        //              si T(vx) negatif -> return { -vx,  vy }
-        Vector2 tmp4,tmp1,tmpv;
-        tmpv = RotationTransform(this->GetVitesse(), Pi / 4.f);
-        tmp4 = RotationTransform(this->GetLosa().p4, Pi / 4.f);
-        tmp1 = RotationTransform(lob->GetLosa().p1, Pi / 4.f);
-        if (tmp4.x > tmp1.x && tmpv.x > 0.f)
+        if ((p3Rel > lob->GetCritLosa().p1 && p3Rel <= lob->GetCritLosa().p2) || (p4Rel > lob->GetCritLosa().p1 && p4Rel <= lob->GetCritLosa().p2))
         {
-            if (tmpv.y > 0.f)
-                m_vitesse = Vector2 {  std::sqrt((tmpv.y * tmpv.y) / 2.f),  std::sqrt((tmpv.y * tmpv.y) / 2.f) };
-            else
-                m_vitesse = Vector2 { -std::sqrt((tmpv.y * tmpv.y) / 2.f), -std::sqrt((tmpv.y * tmpv.y) / 2.f) };
-        }
-    }
-    else if((p1Rel > lob->GetCritLosa().p2 && p1Rel <= lob->GetCritLosa().p3) || (p4Rel > lob->GetCritLosa().p2 && p4Rel <= lob->GetCritLosa().p3))
-    {
-        // 2 cas ici -> si T(vy) positif -> return {  vx,  vy }
-        //              si T(vy) negatif -> return { -vx, -vy }
-        Vector2 tmp8,tmp4,tmpv;
-        tmpv = RotationTransform(this->GetVitesse(), Pi / 4.f);
-        tmp8 = RotationTransform(this->GetOctogone().p8, Pi / 4.f);
-        tmp4 = RotationTransform(lob->GetLosa().p4, Pi / 4.f);
-        if (tmp8.x > tmp4.x && tmpv.x > 0.f)
-        {
-            if (tmpv.y > 0.f)
-                m_vitesse = Vector2 { std::sqrt((tmpv.y * tmpv.y) / 2.f), std::sqrt((tmpv.y * tmpv.y) / 2.f) };
-            else
-                m_vitesse = Vector2 { - std::sqrt((tmpv.y * tmpv.y) / 2.f), - std::sqrt((tmpv.y * tmpv.y) / 2.f) };
-        }
-    }
-    else if((p1Rel > lob->GetCritLosa().p3 && p1Rel <= lob->GetCritLosa().p4) || (p2Rel > lob->GetCritLosa().p3 && p2Rel <= lob->GetCritLosa().p4))
-    {
-        // 2 cas ici -> si T(vx) positif -> return {  vx, -vy }
-        //              si T(vx) negatif -> return { -vx,  vy }
-        Vector2 tmp1,tmp5,tmpv;
-        tmpv = RotationTransform(this->GetVitesse(), Pi / 4.f);
-        tmp1 = RotationTransform(this->GetOctogone().p1, Pi / 4.f);
-        tmp5 = RotationTransform(lob->GetLosa().p3, Pi / 4.f);
-        if (tmp1.y > tmp5.y && tmpv.y > 0.f)
-        {
-            if (tmpv.x > 0.f)
-                m_vitesse = Vector2 {  std::sqrt((tmpv.x * tmpv.x) / 2.f), -std::sqrt((tmpv.x * tmpv.x) / 2.f) };
-            else
-                m_vitesse = Vector2 { -std::sqrt((tmpv.x * tmpv.x) / 2.f),  std::sqrt((tmpv.x * tmpv.x) / 2.f) };
-        }
-    }
-    else if((p2Rel > lob->GetCritLosa().p3 || p2Rel <= lob->GetCritLosa().p4) || (p3Rel > lob->GetCritLosa().p3 || p3Rel <= lob->GetCritLosa().p4))
-    {
-        // 2 cas ici -> si T(vy) positif -> return {  vx,  vy }
-        //              si T(vy) negatif -> return { -vx, -vy }
-        Vector2 tmp4,tmp7,tmpv;
-        tmpv = RotationTransform(this->GetVitesse(), Pi / 4.f);
-        tmp4 = RotationTransform(this->GetOctogone().p4, Pi / 4.f);
-        tmp7 = RotationTransform(lob->GetLosa().p1, Pi / 4.f);
-        if (tmp4.x < tmp7.x && tmpv.x < 0.f)
-        {
-            if (tmpv.y > 0.f)
-                m_vitesse = Vector2 {  std::sqrt((tmpv.y * tmpv.y) / 2.f),  std::sqrt((tmpv.y * tmpv.y) / 2.f) };
-            else
-                m_vitesse = Vector2 { -std::sqrt((tmpv.y * tmpv.y) / 2.f), -std::sqrt((tmpv.y * tmpv.y) / 2.f) };
-        }
-    }
+            Vector2 pTmp3, lTmp1, tmpv;
+            pTmp3 = RotationTransform(m_losa.p3, Pi / 4.f);
+            lTmp1 = RotationTransform(lob->GetLosa().p1, Pi / 4.f);
+            tmpv = RotationTransform(this->GetVitesse(), Pi / 4.f);
 
-    if (lob->GetWidth() > lob->GetHeight())
-    {
+            if (pTmp3.x > lTmp1.x && tmpv.x > 0)
+            {
+                if (tmpv.y > 0.f)
+                    m_vitesse = Vector2 {  std::sqrt(tmpv.y * tmpv.y / 2.f),  std::sqrt(tmpv.y * tmpv.y / 2.f) };
+                else
+                    m_vitesse = Vector2 { -std::sqrt(tmpv.y * tmpv.y / 2.f), -std::sqrt(tmpv.y * tmpv.y / 2.f) };
+            }
+        }
+        else if ((p1Rel > lob->GetCritLosa().p2 && p1Rel <= lob->GetCritLosa().p3) || (p4Rel > lob->GetCritLosa().p2 && p4Rel <= lob->GetCritLosa().p3))
+        {
+            Vector2 tmp1, tmp2, tmpv;
+            tmp1 = RotationTransform(m_losa.p1, Pi / 4.f);
+            tmp2 = RotationTransform(lob->GetLosa().p2, Pi / 4.f);
+            tmpv = RotationTransform(this->GetVitesse(), Pi / 4.f);
 
+            if (tmp1.y > tmp2.y && tmpv.y > 0.f)
+            {
+                if (tmpv.x > 0.f)
+                    m_vitesse = Vector2 {  std::sqrt(tmpv.x * tmpv.x / 2.f), -std::sqrt(tmpv.x * tmpv.x / 2.f) };
+                else
+                    m_vitesse = Vector2 { -std::sqrt(tmpv.x * tmpv.x / 2.f),  std::sqrt(tmpv.x * tmpv.x / 2.f) };
+            }
+        }
+        else if ((p1Rel > lob->GetCritLosa().p3 && p1Rel <= lob->GetCritLosa().p4) || (p2Rel > lob->GetCritLosa().p3 && p2Rel <= lob->GetCritLosa().p4))
+        {
+            Vector2 tmp1, tmp3, tmpv;
+            tmp1 = RotationTransform(m_losa.p1, Pi / 4.f);
+            tmp3 = RotationTransform(lob->GetLosa().p3, Pi / 4.f);
+            tmpv = RotationTransform(this->GetVitesse(), Pi / 4.f);
+
+            if (tmp1.x < tmp3.x && tmpv.x < 0.f)
+            {
+                if (tmpv.y > 0.f)
+                    m_vitesse = Vector2 {  std::sqrt(tmpv.y * tmpv.y / 2.f),  std::sqrt(tmpv.y * tmpv.y / 2.f) };
+                else
+                    m_vitesse = Vector2 { -std::sqrt(tmpv.y * tmpv.y / 2.f), -std::sqrt(tmpv.y * tmpv.y / 2.f) };
+            }
+        }
+        else
+        {
+            Vector2 tmp1, tmp2, tmpv;
+            tmp1 = RotationTransform(lob->GetLosa().p1, Pi / 4.f);
+            tmp2 = RotationTransform(m_losa.p2, Pi / 4.f);
+            tmpv = RotationTransform(this->GetVitesse(), Pi / 4.f);
+
+            if (tmp2.y < tmp1.y && tmpv.y < 0.f)
+            {
+                if (tmpv.x > 0.f)
+                    m_vitesse = Vector2 {  std::sqrt(tmpv.x * tmpv.x / 2.f), -std::sqrt(tmpv.x * tmpv.x / 2.f) };
+                else
+                    m_vitesse = Vector2 { -std::sqrt(tmpv.x * tmpv.x / 2.f),  std::sqrt(tmpv.x * tmpv.x / 2.f) };
+
+            }
+        }
     }
     else
     {
+        if ((p3Rel > lob->GetCritLosa().p1 && p3Rel <= lob->GetCritLosa().p2) || (p4Rel > lob->GetCritLosa().p1 && p4Rel <= lob->GetCritLosa().p2))
+        {
+            Vector2 pTmp3, lTmp1, tmpv;
+            pTmp3 = RotationTransform(m_losa.p3, Pi / 4.f);
+            lTmp1 = RotationTransform(lob->GetLosa().p1, Pi / 4.f);
+            tmpv = RotationTransform(this->GetVitesse(), Pi / 4.f);
 
+            if (pTmp3.x > lTmp1.x && tmpv.x > 0)
+            {
+                if (tmpv.y > 0.f)
+                    m_vitesse = Vector2 {  std::sqrt(tmpv.y * tmpv.y / 2.f),  std::sqrt(tmpv.y * tmpv.y / 2.f) };
+                else
+                    m_vitesse = Vector2 { -std::sqrt(tmpv.y * tmpv.y / 2.f), -std::sqrt(tmpv.y * tmpv.y / 2.f) };
+            }
+        }
+        else if ((p1Rel > lob->GetCritLosa().p2 && p1Rel <= lob->GetCritLosa().p3) || (p4Rel > lob->GetCritLosa().p2 && p4Rel <= lob->GetCritLosa().p3))
+        {
+            Vector2 tmp1, tmp2, tmpv;
+            tmp1 = RotationTransform(m_losa.p1, Pi / 4.f);
+            tmp2 = RotationTransform(lob->GetLosa().p2, Pi / 4.f);
+            tmpv = RotationTransform(this->GetVitesse(), Pi / 4.f);
+
+            if (tmp1.y > tmp2.y && tmpv.y > 0.f)
+            {
+                if (tmpv.x > 0.f)
+                    m_vitesse = Vector2 {  std::sqrt(tmpv.x * tmpv.x / 2.f), -std::sqrt(tmpv.x * tmpv.x / 2.f) };
+                else
+                    m_vitesse = Vector2 { -std::sqrt(tmpv.x * tmpv.x / 2.f),  std::sqrt(tmpv.x * tmpv.x / 2.f) };
+            }
+        }
+        else if ((p2Rel > lob->GetCritLosa().p4 && p2Rel <= lob->GetCritLosa().p1) || (p3Rel > lob->GetCritLosa().p4 && p3Rel <= lob->GetCritLosa().p1))
+        {
+            Vector2 tmp1, tmp2, tmpv;
+            tmp1 = RotationTransform(lob->GetLosa().p1, Pi / 4.f);
+            tmp2 = RotationTransform(m_losa.p2, Pi / 4.f);
+            tmpv = RotationTransform(this->GetVitesse(), Pi / 4.f);
+
+            if (tmp2.y < tmp1.y && tmpv.y < 0.f)
+            {
+                if (tmpv.x > 0.f)
+                    m_vitesse = Vector2 {  std::sqrt(tmpv.x * tmpv.x / 2.f), -std::sqrt(tmpv.x * tmpv.x / 2.f) };
+                else
+                    m_vitesse = Vector2 { -std::sqrt(tmpv.x * tmpv.x / 2.f),  std::sqrt(tmpv.x * tmpv.x / 2.f) };
+
+            }
+        }
+        else
+        {
+            Vector2 tmp1, tmp3, tmpv;
+            tmp1 = RotationTransform(m_losa.p1, Pi / 4.f);
+            tmp3 = RotationTransform(lob->GetLosa().p3, Pi / 4.f);
+            tmpv = RotationTransform(this->GetVitesse(), Pi / 4.f);
+
+            if (tmp1.x < tmp3.x && tmpv.x < 0.f)
+            {
+                if (tmpv.y > 0.f)
+                    m_vitesse = Vector2 {  std::sqrt(tmpv.y * tmpv.y / 2.f),  std::sqrt(tmpv.y * tmpv.y / 2.f) };
+                else
+                    m_vitesse = Vector2 { -std::sqrt(tmpv.y * tmpv.y / 2.f), -std::sqrt(tmpv.y * tmpv.y / 2.f) };
+            }
+        }
     }
 }
 

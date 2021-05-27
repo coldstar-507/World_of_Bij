@@ -78,6 +78,7 @@ float DegToRad(float p_deg);
 
 float Distance(const Vector2& p1, const Vector2& p2);
 
+float NormalizeRad(float rad);
 
 // L'angle calculer est celui de p1
 // Donc pour la collision, il est plus facile de calculer le "relative angle"
