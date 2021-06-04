@@ -72,11 +72,9 @@ struct CriticalAngles
 
 float RadToDeg(float p_rad);
 
-
 float DegToRad(float p_deg);
 
-
-float Distance(const Vector2& p1, const Vector2& p2);
+float Distance(const Vector2 &p1, const Vector2 &p2);
 
 float NormalizeRad(float rad);
 
@@ -84,6 +82,8 @@ float NormalizeRad(float rad);
 // Donc pour la collision, il est plus facile de calculer le "relative angle"
 // de l'objet avec lequel on entre en collision
 float RelativeAngle(const Vector2& p1, const Vector2& p2);
+
+Vector2 MiddlePoint(const Vector2 &p1, const Vector2 &p2);
 
 Vector2 RotationTransform(const Vector2& p, float angle);
 

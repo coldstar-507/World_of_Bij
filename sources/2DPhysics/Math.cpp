@@ -69,3 +69,9 @@ Vector2 RandomPoint()
     return { (float) (rand() % REGION_SIZE_X), (float) (rand() % REGION_SIZE_Y) };
 }
 
+Vector2 MiddlePoint(const Vector2 &p1, const Vector2 &p2)
+{
+    float tetha = RelativeAngle(p1, p2);
+    float halfDist = Distance(p1, p2) / 2.f;
+    return { p1.x + std::cos(tetha) * halfDist, p1.y + std::sin(tetha) * halfDist };
+}

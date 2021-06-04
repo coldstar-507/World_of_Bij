@@ -18,6 +18,13 @@ void SandboxApp::Init()
     ZoneManager::Init(player);
     Camera::Init(player->GetPositionAdress());
 
+    Vector2 p1 = RandomPoint();
+    Vector2 p2 = RandomPoint();
+    Vector2 mp = MiddlePoint(p1, p2);
+    Loger::logv(p1, "P1");
+    Loger::logv(p2, "P2");
+    Loger::logv(mp, "mp");
+
 }
 
 void SandboxApp::Render()
@@ -75,8 +82,6 @@ void SandboxApp::Events(SDL_Event *event)
 				player->SlowlyMoving();
 				break;
 			case SDLK_TAB:
-				//player->TargetMonsters(ZoneManager::CurrentZone()->m_monstersVector);
-				Loger::log(player->m_monsterTarget);
 				break;
 			case SDLK_ESCAPE:
 				SandboxApp::Stop();
